@@ -46,6 +46,7 @@ module PgSearch
       if should_have_document
         create_or_update_pg_search_document
         pg_search_document_update(pg_search_document) if self.respond_to?(:pg_search_document_update)
+        pg_search_document.save!
       else
         pg_search_document.destroy if pg_search_document
       end
