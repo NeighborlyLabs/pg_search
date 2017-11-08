@@ -44,9 +44,8 @@ module PgSearch
         unless_conditions.all? { |condition| !condition.to_proc.call(self) }
 
       if should_have_document
-        create_pg_search_document if pg_search_document.nil?
+        create_or_update_pg_search_document
         pg_search_document_update(pg_search_document) if self.respond_to?(:pg_search_document_update)
-        pg_search_document.save
       else
         pg_search_document.destroy if pg_search_document
       end
